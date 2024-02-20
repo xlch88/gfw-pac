@@ -6,8 +6,6 @@ name: Python application
 on:
   push:
     branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
 
 permissions:
   contents: write
@@ -36,3 +34,17 @@ jobs:
              --localtld-rule=local-tlds.txt
         git add .
         git push
+    - name: Set up SSH keys
+      run: |
+        mkdir ~/.ssh
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+        chmod 700 ~/.ssh
+        chmod 600 ~/.ssh/id_rsa
+    - name: Add remote repository URL
+      run: git remote add origin <remote_repo_url>
+    - name: Pull latest changes from the remote repo
+      run: git pull --rebase origin $GITHUB_REF
+    - name: Commit and push changes
+      run: |
+        git commit -m "Auto pushed by GitHub Actions"
+        git push origin HEAD:$GITHUB_REF
