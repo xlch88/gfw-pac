@@ -41,7 +41,7 @@ jobs:
         chmod 700 ~/.ssh
         chmod 600 ~/.ssh/id_rsa
     - name: Add remote repository URL
-      run: git remote add origin <remote_repo_url>
+      run: git remote add origin "https://github.com/xlch88/gfw-pac"
     - name: Pull latest changes from the remote repo
       run: git pull --rebase origin $GITHUB_REF
     - name: Commit and push changes
