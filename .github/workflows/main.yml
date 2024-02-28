@@ -39,11 +39,13 @@ jobs:
     - name: Build
       run: |
         rm -rf gfw.pac
+        curl -o delegated-apnic-latest.txt https://ftp.apnic.net/stats/apnic/delegated-apnic-latest
         ./gfw-pac.py -f gfw.pac \
              -p "PROXY 127.0.0.1:18888; DIRECT" \
              --user-rule=custom-domains.txt \
              --direct-rule=direct-domains.txt \
-             --localtld-rule=local-tlds.txt
+             --localtld-rule=local-tlds.txt \
+             --ip-file=delegated-apnic-latest.txt
         git add .
     - name: Set up SSH keys
       run: |
@@ -57,10 +59,7 @@ jobs:
       run: git pull -f origin $GITHUB_REF
     - name: Commit and push changes
       run: |
-        echo "[$(git diff)]"
-        echo "[$(git status)]"
-        exit 0
-        if [[ $(git whatchanged -1 --format=oneline | wc -l) -gt 1 ]]; then
-          git commit -m "Auto pushed by GitHub Actions";
+        if [[ $(git status -s | wc -l) -gt 0 ]]; then
+          git commit -m "Auto gen at $(date "+%Y-%m-%d %T")";
           git push origin HEAD:$GITHUB_REF;
         fi
