@@ -33,7 +33,6 @@ jobs:
              --direct-rule=direct-domains.txt \
              --localtld-rule=local-tlds.txt
         git add .
-        git push
     - name: Set up SSH keys
       run: |
         mkdir ~/.ssh
