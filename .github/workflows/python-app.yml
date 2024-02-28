@@ -46,5 +46,7 @@ jobs:
       run: git pull -f origin $GITHUB_REF
     - name: Commit and push changes
       run: |
-        git commit -m "Auto pushed by GitHub Actions"
-        git push origin HEAD:$GITHUB_REF
+        if [[ $(git whatchanged -1 --format=oneline | wc -l) -gt 1 ]]; then
+          git commit -m "Auto pushed by GitHub Actions";
+          git push origin HEAD:$GITHUB_REF;
+        fi
