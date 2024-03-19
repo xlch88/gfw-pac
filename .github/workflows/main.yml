@@ -21,7 +21,7 @@ jobs:
       run: |
         curl -o delegated-apnic-latest.txt https://ftp.apnic.net/stats/apnic/delegated-apnic-latest
         ./gfw-pac.py -f gfw.pac \
-             -p "PROXY 127.0.0.1:18888; DIRECT" \
+             -p "PROXY 127.0.0.1:6565; DIRECT" \
              --user-rule=custom-domains.txt \
              --direct-rule=direct-domains.txt \
              --localtld-rule=local-tlds.txt \
