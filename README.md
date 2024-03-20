@@ -2,6 +2,16 @@
 
 科学上网 PAC 文件生成器。通过自定义域名和中国 IP 地址生成 PAC(Proxy auto-config) 文件。对存在于自定义域名和解析出的 IP 在国外的域名使用代理。
 
+## 怎么用？
+```
+https://raw.githubusercontent.com/xlch88/gfw-pac/master/gfw.pac
+```
+
+将以上url填入 Proxy Pac Switcher 之类的插件使用。
+
+https://chromewebstore.google.com/detail/dcokccgklilfbehagkdnmlpcdonfopeh  
+https://github.com/sura0111/proxyPac
+
 ## 特性
 * 速度快，优先按域名匹配，再按解析后的 IP 匹配
 * 可自定义需要代理的域名
